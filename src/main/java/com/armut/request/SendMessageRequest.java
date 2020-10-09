@@ -3,6 +3,7 @@ package com.armut.request;
 
 import lombok.Data;
 
+
 @Data
 public class SendMessageRequest extends UserRequest {
 	

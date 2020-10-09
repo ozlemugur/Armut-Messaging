@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.armut.common.ResponseBase;
 import com.armut.common.ResponseEnum;
 import com.armut.common.ServiceBase;
 import com.armut.exception.ArmutServiceException;
@@ -18,6 +19,7 @@ import com.armut.request.GetMessagesRequest;
 import com.armut.request.Message;
 import com.armut.request.SendMessageRequest;
 import com.armut.response.GetMessagesResponse;
+import com.armut.response.LoginResponse;
 import com.armut.response.SendMessageResponse;
 
 @Service
@@ -34,8 +36,10 @@ public class MessageService extends ServiceBase {
 	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt><dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt><dd>There is a line break.</dd>
+	 * <dt><span class="strong">Heading 1</span></dt>
+	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong">Heading 2</span></dt>
+	 * <dd>There is a line break.</dd>
 	 * </dl>
 	 *
 	 * @param x foo
@@ -64,8 +68,10 @@ public class MessageService extends ServiceBase {
 	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt><dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt><dd>There is a line break.</dd>
+	 * <dt><span class="strong">Heading 1</span></dt>
+	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong">Heading 2</span></dt>
+	 * <dd>There is a line break.</dd>
 	 * </dl>
 	 *
 	 * @param x foo
@@ -75,16 +81,18 @@ public class MessageService extends ServiceBase {
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public SendMessageResponse sendMessage(SendMessageRequest sendMessageRequest) throws ArmutServiceException {
 		try {
-			Long senderUserId = userService.getUserByUserName(sendMessageRequest.getUserName()).getId();
-			Long receiverUserId = userService.getUserByUserName(sendMessageRequest.getReceiverUserName()).getId();
+			LoginResponse receiverStatus = userService.checkUser(sendMessageRequest.getReceiverUserName());
+			if (!receiverStatus.equals(ResponseEnum.SUCCESS))
+				return  (SendMessageResponse)(ResponseBase)receiverStatus;
+			Long senderUserId = userService.checkUser(sendMessageRequest.getUserName()).getUserId();
 
-			if (blockedListService.isUserBlockedByProcessUser(senderUserId, receiverUserId))
+			if (blockedListService.isUserBlockedByProcessUser(senderUserId, receiverStatus.getUserId()))
 				return new SendMessageResponse(ResponseEnum.BLOCKED_USER);
 
 			MessageEntity message = new MessageEntity();
 			BeanUtils.copyProperties(sendMessageRequest.getMessage(), message);
 			message.setSenderId(senderUserId);
-			message.setReceiverId(receiverUserId);
+			message.setReceiverId(receiverStatus.getUserId());
 			messageRepository.save(message);
 
 			return new SendMessageResponse(ResponseEnum.SUCCESS);
@@ -97,8 +105,10 @@ public class MessageService extends ServiceBase {
 	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt><dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt><dd>There is a line break.</dd>
+	 * <dt><span class="strong">Heading 1</span></dt>
+	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong">Heading 2</span></dt>
+	 * <dd>There is a line break.</dd>
 	 * </dl>
 	 *
 	 * @param x foo

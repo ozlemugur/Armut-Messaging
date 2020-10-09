@@ -1,4 +1,4 @@
-package com.armut.test;
+package com.armut;
 
 import java.io.IOException;
 import org.junit.runner.RunWith;
@@ -10,10 +10,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.armut.common.Utils;
+import com.armut.service.UserService;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest()
@@ -23,6 +27,12 @@ public abstract class AbstractTest {
 	protected MockMvc mvc;
 	@Autowired
 	WebApplicationContext webApplicationContext;
+	@Autowired
+	private Utils utils;
+
+	@Autowired
+	protected UserService userService;
+
 
 	final ObjectMapper objectMapper = new ObjectMapper();
 

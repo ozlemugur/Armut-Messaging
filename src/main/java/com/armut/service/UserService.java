@@ -108,46 +108,6 @@ public class UserService extends ServiceBase {
 	 * @return foo
 	 * @throws foo
 	 */
-	public boolean checkUserNameExistance(String userName) throws ArmutServiceException {
-		try {
-			return userRepository.findByUserName(userName) == null ? false : true;
-		} catch (Exception ex) {
-			throw new ArmutServiceException(ex);
-		}
-	}
-
-	/**
-	 * Introdcution
-	 * 
-	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * </dl>
-	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
-	 */
-	public UserEntity getUserByUserName(String userName) {
-		return userRepository.findByUserName(userName);
-	}
-
-	/**
-	 * Introdcution
-	 * 
-	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * </dl>
-	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
-	 */
 	public boolean checkUserPassword(UserEntity user) throws ArmutServiceException {
 		try {
 			Optional<UserEntity> userDb = userRepository.findById(user.getId());
@@ -171,8 +131,9 @@ public class UserService extends ServiceBase {
 	 * @return foo
 	 * @throws foo
 	 */
-	public LoginResponse checkUserAndToken(UserRequest userRequest) throws ArmutServiceException {
+	public LoginResponse validateToken(UserRequest userRequest) throws ArmutServiceException {
 		try {
+			// is randomization of token enough for me, UUID and username my primary key.
 			UserEntity user = userRepository.findByUserName(userRequest.getUserName());
 			if (user == null)
 				return new LoginResponse(ResponseEnum.CHECK_YOUR_DATA);
@@ -232,6 +193,14 @@ public class UserService extends ServiceBase {
 			if (user.get() != null)
 				userName = user.get().getUserName();
 			return userName;
+		} catch (Exception ex) {
+			throw new ArmutServiceException(ex);
+		}
+	}
+
+	public UserEntity getUserByUserName(String userName) throws ArmutServiceException {
+		try {
+			return userRepository.findByUserName(userName);
 		} catch (Exception ex) {
 			throw new ArmutServiceException(ex);
 		}
