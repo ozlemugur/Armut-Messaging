@@ -1,15 +1,14 @@
 package com.armut.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
+@JsonIgnoreProperties(value = { "token" }, allowGetters = false)
 @Data
 public class SignUpRequest extends UserRequest {
 
 	private String password;
 
-//	public SignUpRequest(String userName, String password, String token) {
-//		this.setUserName(userName);
-//		
-//	}
 
 }

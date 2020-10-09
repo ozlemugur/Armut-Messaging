@@ -1,4 +1,4 @@
-package com.armut.test;
+package com.armut;
 
 
 import static org.hamcrest.CoreMatchers.equalTo;

@@ -1,4 +1,4 @@
-package com.armut.test;
+package com.armut;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,32 +9,23 @@ import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.armut.common.ResponseEnum;
-import com.armut.common.Utils;
 import com.armut.model.UserEntity;
 import com.armut.request.BlockUserRequest;
 import com.armut.request.LoginRequest;
 import com.armut.request.SignUpRequest;
 import com.armut.response.BlockUserResponse;
 import com.armut.response.SignUpResponse;
-import com.armut.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @TestMethodOrder(OrderAnnotation.class)
+@Slf4j
 public class UserControllerTest extends AbstractTest {
-
-	@Autowired
-	private Utils utils;
-
-	@Autowired
-	private UserService userService;
 
 	@Override
 	@Before
@@ -57,14 +48,13 @@ public class UserControllerTest extends AbstractTest {
 
 		int status = mvcResult.getResponse().getStatus();
 		log.error("ARMUT SIGNUP mock data, luffy is  created. ********** " + status);
-		
+
 	}
 
 	@Test
 	@Order(2)
 	public void signUpMockData2() throws Exception {
 		String uri = "/users/signup";
-
 		SignUpRequest request = new SignUpRequest();
 		request.setUserName("robin");
 		request.setPassword("lola");
@@ -76,7 +66,7 @@ public class UserControllerTest extends AbstractTest {
 		int status = mvcResult.getResponse().getStatus();
 		log.error("ARMUT SIGNUP mocck data , robin is created.  ********** " + status);
 	}
-	
+
 	@Test
 	@Order(3)
 	public void signUpMockData3() throws Exception {
@@ -89,7 +79,6 @@ public class UserControllerTest extends AbstractTest {
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
-
 		int status = mvcResult.getResponse().getStatus();
 		log.error("ARMUT SIGNUP mock data , blackbeard is created.  ********** " + status);
 	}
@@ -98,7 +87,6 @@ public class UserControllerTest extends AbstractTest {
 	public void signUp() throws Exception {
 		String uri = "/users/signup";
 		Random random = new Random(4000);
-
 		SignUpRequest request = new SignUpRequest();
 		request.setUserName(random.toString());
 		request.setPassword("lola");
@@ -106,7 +94,6 @@ public class UserControllerTest extends AbstractTest {
 		MvcResult mvcResult = mvc.perform(
 				MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson))
 				.andReturn();
-
 		int status = mvcResult.getResponse().getStatus();
 		log.error("ARMUT SIGNUP  ********** " + status);
 		assertEquals(200, status);
@@ -115,7 +102,6 @@ public class UserControllerTest extends AbstractTest {
 	@Test
 	public void signUpWithAUserNameAlreadyExists() throws Exception {
 		String uri = "/users/signup";
-		Random random = new Random(4000);
 
 		SignUpRequest request = new SignUpRequest();
 		request.setUserName("sondia");

@@ -13,9 +13,6 @@ import com.armut.repository.BlockedListRepository;
 import com.armut.repository.UserRepository;
 import com.armut.request.BlockUserRequest;
 import com.armut.response.BlockUserResponse;
-import com.armut.response.SendMessageResponse;
-import com.armut.response.SignUpResponse;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Service

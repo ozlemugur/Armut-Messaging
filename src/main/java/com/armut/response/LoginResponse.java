@@ -2,7 +2,6 @@ package com.armut.response;
 
 import com.armut.common.ResponseBase;
 import com.armut.common.ResponseEnum;
-import com.armut.request.UserRequest;
 
 import lombok.Data;
 
