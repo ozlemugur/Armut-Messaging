@@ -78,7 +78,7 @@ public class MessageService extends ServiceBase {
 		try {
 			LoginResponse receiverStatus = userService.checkUser(sendMessageRequest.getReceiverUserName());
 			if (!receiverStatus.equals(ResponseEnum.SUCCESS))
-				return  (SendMessageResponse)(ResponseBase)receiverStatus;
+				return  new SendMessageResponse(receiverStatus);
 			Long senderUserId = userService.checkUser(sendMessageRequest.getUserName()).getUserId();
 
 			if (blockedListService.isUserBlockedByProcessUser(senderUserId, receiverStatus.getUserId()))
