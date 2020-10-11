@@ -3,6 +3,7 @@ package com.armut.exception;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -15,14 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-//	@Autowired
-//	private ExceptionLogService exceptionLogService;
 
 	private ResponseEntity<ErrorMessage> error(final Exception exception, final HttpStatus httpStatus,
 			HttpServletRequest request) {
-//		ExceptionLog exceptionLog = new ExceptionLog();
-//		exceptionLog.setException(exception.toString());
-//		exceptionLogService.logException(exceptionLog);
 		return new ResponseEntity<>(new ErrorMessage(exception, request.getRequestURI()), httpStatus);
 	}
 
@@ -39,19 +35,21 @@ public class GlobalExceptionHandler {
 				"ARMUT HttpRequestMethodNotSupportedException [ERROR]  ********** " +  ExceptionUtils.getStackTrace(e));
 		return error(e, HttpStatus.BAD_REQUEST, request);
 	}
-
-//	@ExceptionHandler(ExceptionLogDbInsertionException.class)
-//	public ResponseEntity<ErrorMessage> handleExceptionLogDbInsertionException(HttpServletRequest request,
-//			ExceptionLogDbInsertionException e) throws ExceptionLogDbInsertionException {
-//		System.out.print(e.toString());
-//		return error(e, HttpStatus.INTERNAL_SERVER_ERROR, request);
-//	}
+	
+	@ExceptionHandler(JDBCConnectionException.class)
+	public ResponseEntity<ErrorMessage> handleJDBCConnectionException(HttpServletRequest request,
+			JDBCConnectionException e) {
+		log.error(
+				"ARMUT JDBCConnectionException [ERROR]  ********** " +  ExceptionUtils.getStackTrace(e));
+		return error(new Exception("DB is downn"), HttpStatus.BAD_REQUEST, request);
+	}
+	
 
 	@ExceptionHandler(ArmutServiceException.class)
 	public ResponseEntity<ErrorMessage> handleArmutServiceException(HttpServletRequest request,
 			ArmutServiceException e) {
 		log.error("ARMUT SERVICE EXCEPTION [ERROR]  ********** " + e +  ExceptionUtils.getStackTrace(e));
-		return error(null, HttpStatus.INTERNAL_SERVER_ERROR, request);
+		return error(new Exception("Service Exception, get in touch with the provider"), HttpStatus.INTERNAL_SERVER_ERROR, request);
 	}
 
 	@ExceptionHandler(ArmutControllerException.class)
@@ -59,7 +57,7 @@ public class GlobalExceptionHandler {
 			ArmutControllerException e) {
 	
 		log.error("ARMUT CONTROLLER EXCEPTION [ERROR]  ********** " + ExceptionUtils.getStackTrace(e));
-		return error(new Exception(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+		return error(new Exception("Controller Exception, get in touch with the provider"), HttpStatus.INTERNAL_SERVER_ERROR, request);
 	}
 
 }

@@ -15,6 +15,9 @@ public class GetMessagesResponse extends ResponseBase {
 
 	}
 
+	public GetMessagesResponse(ResponseBase base) {
+      super(base.getMessage(), base.getCode());
+	}
 	public GetMessagesResponse(String message, String errorCode) {
 		super(message, errorCode);
 	}

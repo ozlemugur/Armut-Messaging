@@ -33,18 +33,16 @@ public class MessageService extends ServiceBase {
 	private BlockedListService blockedListService;
 
 	/**
-	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt>
-	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong"></span>getMessages</dt>
+	 * <dd>it is used for getting user's all messages</dd>
+	 * <dt></dt>
 	 * </dl>
 	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
+	 * @param GetMessagesRequest getMessagesRequest
+	 * @return GetMessagesResponse
+	 * @throws ArmutServiceException
 	 */
 	public GetMessagesResponse getMessages(GetMessagesRequest getMessagesRequest) throws ArmutServiceException {
 		try {
@@ -65,18 +63,15 @@ public class MessageService extends ServiceBase {
 	}
 
 	/**
-	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt>
-	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong">sendMessage</span></dt>
+	 * <dd>it is used for sending a message one user to another user</dd>
 	 * </dl>
 	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
+	 * @param SendMessageRequest sendMessageRequest
+	 * @return SendMessageResponse
+	 * @throws ArmutServiceException
 	 */
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public SendMessageResponse sendMessage(SendMessageRequest sendMessageRequest) throws ArmutServiceException {
@@ -102,18 +97,15 @@ public class MessageService extends ServiceBase {
 	}
 
 	/**
-	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt>
-	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong">copyMessageListToMessageRequestList</span></dt>
+	 * <dd>it is used for copying messages, MessageEntity to Message</dd>
 	 * </dl>
 	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
+	 * @param List{@literal<MessageEntity>} entityList)
+	 * @return List{@literal<Message>}
+	 * @throws ArmutServiceException }
 	 */
 	private List<Message> copyMessageListToMessageRequestList(List<MessageEntity> entityList)
 			throws ArmutServiceException {

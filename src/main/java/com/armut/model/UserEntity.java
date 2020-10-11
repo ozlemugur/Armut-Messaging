@@ -1,10 +1,8 @@
 package com.armut.model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.Valid;
 
 
 import com.armut.common.ModelBase;
@@ -17,15 +15,10 @@ import lombok.Data;
 public class UserEntity extends ModelBase {
 
 	@Column(length = 50, nullable = false)
-	@Valid
 	private String userName;
-	@Column(nullable = false)
-	
+	@Column(length = 50, nullable = false)
 	private String password;
-	
-	//private String token ;
-	
-	@Column(name = "UUID", nullable=true)
+	@Column(name = "token", nullable = true)
 	private String token;
 
 }

@@ -2,7 +2,6 @@ package com.armut.service;
 
 import java.util.Optional;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,18 +28,15 @@ public class UserService extends ServiceBase {
 	private Utils utils;
 
 	/**
-	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt>
-	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong">public SignUpResponse signUp(SignUpRequest signUpRequest)</span></dt>
+	 * <dd> signup operation</dd>
 	 * </dl>
 	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
+	 * @param SignUpRequest signUpRequest
+	 * @return SignUpResponse
+	 * @throws ArmutServiceException
 	 */
 	public SignUpResponse signUp(SignUpRequest signUpRequest) throws ArmutServiceException {
 		try {
@@ -61,18 +57,17 @@ public class UserService extends ServiceBase {
 	}
 
 	/**
-	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
+	 * <dt><span class="strong">public LoginResponse login(LoginRequest loginRequest) throws ArmutServiceException </span></dt>
 	 * <dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt>
+	 * <dt><span class="strong">login operation/span></dt>
 	 * <dd>There is a line break.</dd>
 	 * </dl>
 	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
+	 * @param LoginRequest loginRequest
+	 * @return LoginResponse
+	 * @throws ArmutServiceException
 	 */
 	public LoginResponse login(LoginRequest loginRequest) throws ArmutServiceException {
 		try {
@@ -95,18 +90,15 @@ public class UserService extends ServiceBase {
 	}
 
 	/**
-	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt>
-	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong">public boolean checkUserPassword(UserEntity user) throws ArmutServiceException </span></dt>
+	 * <dd>it is used for checking user's password</dd>
 	 * </dl>
 	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
+	 * @param serEntity user
+	 * @return boolean
+	 * @throws ArmutServiceException
 	 */
 	public boolean checkUserPassword(UserEntity user) throws ArmutServiceException {
 		try {
@@ -118,18 +110,15 @@ public class UserService extends ServiceBase {
 	}
 
 	/**
-	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt>
-	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong">public LoginResponse validateToken(UserRequest userRequest) throws ArmutServiceException </span></dt>
+	 * <dd>Validate the user token which was given on the login process</dd> 
 	 * </dl>
 	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
+	 * @param UserRequest userRequest
+	 * @return LoginResponse
+	 * @throws  ArmutServiceException 
 	 */
 	public LoginResponse validateToken(UserRequest userRequest) throws ArmutServiceException {
 		try {
@@ -150,8 +139,8 @@ public class UserService extends ServiceBase {
 	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
-	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong">LoginResponse checkUser(String userName) throws ArmutServiceException </span></dt>
+	 * <dd>it is used for checking </dd>
 	 * <dt><span class="strong">Heading 2</span></dt>
 	 * <dd>There is a line break.</dd>
 	 * </dl>

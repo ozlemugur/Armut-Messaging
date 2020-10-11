@@ -16,7 +16,6 @@ import com.armut.response.BlockUserResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
 public class BlockedListService extends ServiceBase {
 
 	@Autowired
@@ -25,16 +24,16 @@ public class BlockedListService extends ServiceBase {
 	@Autowired
 	private UserRepository userRepository;
 	/**
-	 * Introdcution
 	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt><dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt><dd>There is a line break.</dd>
+	 * <dt><span class="strong">Block user function</span></dt>
+	 * <dt><span class="strong">Heading 2</span>
+	 * </dt><dd> UserName , toBeBlockedUserName, token are mandatory</dd>
 	 * </dl>
 	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
+	 * @param BlockUserRequest blockUserRequest
+	 * @return BlockUserResponse
+	 * @throws ArmutServiceException
 	 */
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public BlockUserResponse blockUser(BlockUserRequest blockUserRequest) throws ArmutServiceException {
@@ -62,11 +61,9 @@ public class BlockedListService extends ServiceBase {
 	}
 
 	/**
-	 * Introdcution
-	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt><dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt><dd>There is a line break.</dd>
+	 * <dt><span class="strong">isUserBlockedByProcessUser</span></dt>
+	 * <dt></dt><dd>senderUserId, recevierUSerId are mandatory</dd>
 	 * </dl>
 	 *
 	 * @param x foo
