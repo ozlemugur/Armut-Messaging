@@ -2,7 +2,9 @@
 Messaging Service 
 
 
-First init swarm using your host public ip as advertise-addr:
+ ##### to deploy swarm
+ 
+ First init swarm using your host public ip as advertise-addr:
 
     > docker swarm init --advertise-addr 192.168.0.29
 
@@ -21,21 +23,43 @@ To deploy armut messaging api , run the following commands:
 
     > docker stack deploy -c armut-stack.yml armut
 
-    >Creating network armut_armut
-    >Creating service armut_postgres
-    >Creating service armut_armutapi
-    >Creating service armut_pgadmin
+    Creating network armut_armut
+    Creating service armut_postgres
+    Creating service armut_armutapi
+    Creating service armut_pgadmin
 
 
-to check services, run th following commands:
+to check services, run the following commands:
 
     >docker service ls
 
-    >ID                  NAME                MODE                REPLICAS            IMAGE                                  PORTS
-    >twanzcnwilko        armut_armutapi      replicated          1/1                 ozlemugur/armutmessagingimage:latest   *:8080->8080/tcp
-    >1diul7yhnlwj        armut_pgadmin       replicated          1/1                 dpage/pgadmin4:latest                  *:5433->80/tcp
-    >9xryu69hf59r        armut_postgres      replicated          1/1                 postgres:12.4                          *:5432->5432/tcp
+    ID                  NAME                MODE                REPLICAS            IMAGE                                  PORTS
+    twanzcnwilko        armut_armutapi      replicated          1/1                 ozlemugur/armutmessagingimage:latest   *:8080->8080/tcp
+    1diul7yhnlwj        armut_pgadmin       replicated          1/1                 dpage/pgadmin4:latest                  *:5433->80/tcp
+    9xryu69hf59r        armut_postgres      replicated          1/1                 postgres:12.4                          *:5432->5432/tcp
 
 
+to scale up armut_armutapi, run the following command:
+
+    >docker service scale armut_armutapi=3
 
 
+    armut_armutapi scaled to 3
+    overall progress: 3 out of 3 tasks 
+    1/3: running   [==================================================>] 
+    2/3: running   [==================================================>] 
+    3/3: running   [==================================================>] 
+    verify: Service converged 
+
+ ##### to deploy with docker-compose
+ 
+ to deploy with docker-compose , you can find the docker-compose.yml file  in th project, run the following command:
+ 
+    >docker-compose up -d
+ 
+ 
+  ##### armut_armutapi endpoints
+  
+  to signup 
+ 
+ 
