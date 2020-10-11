@@ -60,6 +60,30 @@ to scale up armut_armutapi, run the following command:
  
   ##### armut_armutapi endpoints
   
-  to signup 
+  ###### to signup  armut messaging api (change the localhost with your advertise IP as you wish)
+    change the localhost with your advertise IP or set up according to where you prefer to call.
+   >http://localhost:8080/users/signup
+   
+   >{ "userName": "luffy" , "password" : "lola"}
+   
+   ###### to login armut messaging api
+   When the login operation ends succesfully, service returns a token which is going to be used for calling the other operations. Take the token.
+   
+   >http://localhost:8080/users/login
+   
+   >{ "userName": "luffy" , "password" : "lola"}
  
  
+  ###### to send message through the api
+  
+ 
+ http://localhost:8080/messages/sendmessage
+ 
+    { "userName": "luffy" , "token" : "FCEEB9B9D469401FE558062C4BD25954" ,  "receiverUserName" : "robin",
+      "message": {
+      "content" : "text is comminggggg"
+     }
+    }
+ 
+
+
