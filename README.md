@@ -21,20 +21,20 @@ To deploy armut messaging api , run the following commands:
 
     > docker stack deploy -c armut-stack.yml armut
 
-Creating network armut_armut
-Creating service armut_postgres
-Creating service armut_armutapi
-Creating service armut_pgadmin
+    >Creating network armut_armut
+    >Creating service armut_postgres
+    >Creating service armut_armutapi
+    >Creating service armut_pgadmin
 
 
 to check services, run th following commands:
 
     >docker service ls
 
-ID                  NAME                MODE                REPLICAS            IMAGE                                  PORTS
-twanzcnwilko        armut_armutapi      replicated          1/1                 ozlemugur/armutmessagingimage:latest   *:8080->8080/tcp
-1diul7yhnlwj        armut_pgadmin       replicated          1/1                 dpage/pgadmin4:latest                  *:5433->80/tcp
-9xryu69hf59r        armut_postgres      replicated          1/1                 postgres:12.4                          *:5432->5432/tcp
+    >ID                  NAME                MODE                REPLICAS            IMAGE                                  PORTS
+    >twanzcnwilko        armut_armutapi      replicated          1/1                 ozlemugur/armutmessagingimage:latest   *:8080->8080/tcp
+    >1diul7yhnlwj        armut_pgadmin       replicated          1/1                 dpage/pgadmin4:latest                  *:5433->80/tcp
+    >9xryu69hf59r        armut_postgres      replicated          1/1                 postgres:12.4                          *:5432->5432/tcp
 
 
 
