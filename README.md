@@ -161,6 +161,7 @@ to scale up armut_armutapi, run the following command:
        
     #### While building the project, do not forget chosing maven profile. dev/prod
     
+    ##TODOS  caching is going to be added , table column orders have to be managed.
     
    
     
