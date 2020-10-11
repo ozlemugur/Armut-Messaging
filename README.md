@@ -64,16 +64,16 @@ to scale up armut_armutapi, run the following command:
     change the localhost with your advertise IP or set up according to where you prefer to call.
     
     POST
-   >http://192.168.0.29:8080/users/signup
+    http://192.168.0.29:8080/users/signup
    
-   >{ "userName": "luffy" , "password" : "lola"}
+    { "userName": "luffy" , "password" : "lola"}
        {
         "message": "success.",
         "code": "0000"
        }
       
-   >{ "userName": "robin" , "password" : "lola"}
-   >{ "userName": "zoro" , "password" : "lola"}
+    { "userName": "robin" , "password" : "lola"}
+    { "userName": "zoro" , "password" : "lola"}
    
    
    
