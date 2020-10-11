@@ -77,8 +77,8 @@ to scale up armut_armutapi, run the following command:
    
    ###### to login armut messaging api
    When the login operation ends succesfully, service returns a token which is going to be used for calling the other operations. Take the token.
-    POST
-   >http://192.168.0.29:8080/users/login
+      POST
+      http://192.168.0.29:8080/users/login
    
    >{ "userName": "luffy" , "password" : "lola"}
     
@@ -93,14 +93,14 @@ to scale up armut_armutapi, run the following command:
  
   ###### to send message 
   
- 
- http://192.168.0.29:8080/messages/sendmessage
+     POST
+     http://192.168.0.29:8080/messages/sendmessage
  
     { "userName": "luffy" , "token" : "4f3536bc-8315-4ba4-89df-015e70b2f24c" ,  "receiverUserName" : "robin",
       "message": {
       "content" : "text is comminggggg"
+      }
      }
-    }
     
      {
      "message": "success.",
@@ -109,8 +109,8 @@ to scale up armut_armutapi, run the following command:
  
    ##### to get messages
    
-    GET
-    http://192.168.0.29:8080/messages/getmessages
+     GET
+     http://192.168.0.29:8080/messages/getmessages
    
       { "userName": "luffy" , "token" : "4f3536bc-8315-4ba4-89df-015e70b2f24c"}
       
@@ -127,10 +127,10 @@ to scale up armut_armutapi, run the following command:
       }
     
    ##### to block user
-     POST
-     http://192.168.0.29:8080/users/block
+      POST
+      http://192.168.0.29:8080/users/block
     
-    { "userName": "luffy" , "token" : "FCEEB9B9D469401FE558062C4BD25954", "toBeBlockedUserName" : "zoro"}
+     {"userName": "luffy" , "token" : "FCEEB9B9D469401FE558062C4BD25954", "toBeBlockedUserName" : "zoro"}
     
        {
        "message": "success.",
