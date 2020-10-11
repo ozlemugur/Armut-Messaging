@@ -7,6 +7,10 @@ import lombok.Data;
 
 @Data
 public class BlockUserResponse extends ResponseBase {
+	public BlockUserResponse(ResponseBase base) {
+		super(base.getMessage(), base.getCode());
+	}
+
 	public BlockUserResponse(String message, String errorCode) {
 		super(message, errorCode);
 	}

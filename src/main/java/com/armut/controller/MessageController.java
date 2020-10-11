@@ -101,12 +101,12 @@ public class MessageController {
 	public ResponseEntity<SendMessageResponse> sendMessage(@RequestBody SendMessageRequest sendMessageRequest)
 			throws ArmutServiceException, ArmutControllerException {
 		try {
-			LoginResponse validateTokenResponse = userService.validateToken(sendMessageRequest);
+			ResponseBase validateTokenResponse = userService.validateToken(sendMessageRequest);
 			if (!validateTokenResponse.equals(ResponseEnum.SUCCESS)) {
 				activityLogService.insertActivityLog(sendMessageRequest.getUserName(), ActivityEnum.SENDMESSAGE,
 						ActivityStatusEnum.FAILED, validateTokenResponse);
 				return new ResponseEntity<SendMessageResponse>(
-						new SendMessageResponse((ResponseBase) validateTokenResponse), HttpStatus.UNAUTHORIZED);
+						new SendMessageResponse(validateTokenResponse), HttpStatus.UNAUTHORIZED);
 			}
 
 			SendMessageResponse sendMessageResponse = messageService.sendMessage(sendMessageRequest);

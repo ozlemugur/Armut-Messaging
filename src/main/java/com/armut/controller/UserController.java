@@ -118,7 +118,7 @@ public class UserController {
 			if (!validateTokenResponse.equals(ResponseEnum.SUCCESS)) {
 				activityLogService.insertActivityLog(blockUserRequest.getUserName(), ActivityEnum.BLOCKUSER,
 						ActivityStatusEnum.FAILED, validateTokenResponse);
-				return new ResponseEntity<BlockUserResponse>((BlockUserResponse) validateTokenResponse,
+				return new ResponseEntity<BlockUserResponse>(new BlockUserResponse(validateTokenResponse),
 						HttpStatus.UNAUTHORIZED);
 			}
 
@@ -127,7 +127,7 @@ public class UserController {
 			if (!checkToBeBlockedUserResponse.equals(ResponseEnum.SUCCESS)) {
 				activityLogService.insertActivityLog(blockUserRequest.getUserName(), ActivityEnum.BLOCKUSER,
 						ActivityStatusEnum.FAILED, checkToBeBlockedUserResponse);
-				return new ResponseEntity<BlockUserResponse>((BlockUserResponse) checkToBeBlockedUserResponse,
+				return new ResponseEntity<BlockUserResponse>(new BlockUserResponse(checkToBeBlockedUserResponse),
 						HttpStatus.UNAUTHORIZED);
 			}
 

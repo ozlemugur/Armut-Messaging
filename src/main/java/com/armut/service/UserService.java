@@ -126,7 +126,7 @@ public class UserService extends ServiceBase {
 			UserEntity user = userRepository.findByUserName(userRequest.getUserName());
 			if (user == null)
 				return new LoginResponse(ResponseEnum.CHECK_YOUR_DATA);
-			if (user.getToken() != null ? !user.getToken().equals(userRequest.getToken()) : false) {
+			if (user.getToken() != null ? !user.getToken().equals(userRequest.getToken()) : true) {
 				return new LoginResponse(ResponseEnum.TOKEN_EXPIRED);
 			}
 			return new LoginResponse(user.getId(), user.getToken(), ResponseEnum.SUCCESS);
