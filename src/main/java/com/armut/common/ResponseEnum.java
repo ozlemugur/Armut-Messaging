@@ -3,7 +3,7 @@ package com.armut.common;
 
 public enum ResponseEnum {
 
-	SUCCESS("0000", ""), SYSTEM_EXCEPTION("0001", "System Exception"),
+	SUCCESS("0000", "success."), SYSTEM_EXCEPTION("0001", "System Exception"),
 	AUTHENTICATION_ERROR("0002", "Authentication error"),
 	BLOCKED_USER("0003", "You can not send message to this user."),
 	BLOCKED_USER_ALREADY("0004", "You had blocked the user."),

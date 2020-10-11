@@ -12,6 +12,10 @@ public class SendMessageResponse extends ResponseBase {
 
 	}
 
+	public SendMessageResponse(ResponseBase base) {
+		super(base.getMessage(), base.getCode());
+	}
+
 	public SendMessageResponse(String message, String errorCode) {
 		super(message, errorCode);
 	}

@@ -12,6 +12,7 @@ import lombok.Data;
 @Table(name = "blocked_lists")
 @Data
 public class BlockedListEntity extends ModelBase {
+	
 	@Column( nullable=false)
 	private long blockedId;
 	@Column( nullable=false)

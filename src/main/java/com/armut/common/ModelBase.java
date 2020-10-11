@@ -29,9 +29,6 @@ import lombok.Data;
 @Data
 public abstract class ModelBase extends Object implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -48,8 +45,8 @@ public abstract class ModelBase extends Object implements Serializable {
     @LastModifiedDate
     private Date updateDatetime;
     
-    //TODO: status ile ilgili bir şey var mi acaba TT
-    @Column(name = "status", nullable = false)
+  
+    @Column(name = "status", nullable = false, length =1)
     private String status = "1";
 
 }

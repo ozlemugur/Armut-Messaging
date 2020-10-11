@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.armut.common.ActivityEnum;
+import com.armut.common.ActivityStatusEnum;
 import com.armut.common.ResponseBase;
 import com.armut.common.ResponseEnum;
 import com.armut.exception.ArmutControllerException;
@@ -37,18 +38,15 @@ public class MessageController {
 	private UserService userService;
 
 	/**
-	 * Introdcution
-	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt>
-	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong">get messages function/span></dt>
+	 * 
+	 * <dd>User name, token are mandatory.</dd>
 	 * </dl>
-	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
+	 * 
+	 * @param GetMessagesRequest getMessagesRequest
+	 * @return ResponseEntity {@literal <GetMessagesResponse>}
+	 * @throws throws ArmutServiceException, ArmutControllerException
 	 */
 	@GetMapping(value = "/messages/getmessages")
 	public ResponseEntity<GetMessagesResponse> getMessages(@Valid @RequestBody GetMessagesRequest getMessagesRequest)
@@ -56,9 +54,12 @@ public class MessageController {
 		try {
 
 			LoginResponse validateTokenResponse = userService.validateToken(getMessagesRequest);
-			if (!validateTokenResponse.equals(ResponseEnum.SUCCESS))
+			if (!validateTokenResponse.equals(ResponseEnum.SUCCESS)) {
+				activityLogService.insertActivityLog(getMessagesRequest.getUserName(), ActivityEnum.SENDMESSAGE,
+						ActivityStatusEnum.FAILED, validateTokenResponse);
 				return new ResponseEntity<GetMessagesResponse>(
-						(GetMessagesResponse) (ResponseBase) validateTokenResponse, HttpStatus.UNAUTHORIZED);
+						new GetMessagesResponse((ResponseBase) validateTokenResponse), HttpStatus.UNAUTHORIZED);
+			}
 
 			if (validateTokenResponse.equals(ResponseEnum.SUCCESS)) {
 				getMessagesRequest.setUserId(validateTokenResponse.getUserId());
@@ -66,15 +67,19 @@ public class MessageController {
 				GetMessagesResponse getMessagesResponse = messageService.getMessages(getMessagesRequest);
 				if (getMessagesResponse.equals(ResponseEnum.SUCCESS)) {
 
-					activityLogService.insertActivityLog(getMessagesRequest.getUserName(), ActivityEnum.GETMESSAGES, 1);
+					activityLogService.insertActivityLog(getMessagesRequest.getUserName(), ActivityEnum.GETMESSAGES,
+							ActivityStatusEnum.SUCCESS, getMessagesResponse);
 					return new ResponseEntity<GetMessagesResponse>(getMessagesResponse, HttpStatus.OK);
 				} else {
+					activityLogService.insertActivityLog(getMessagesRequest.getUserName(), ActivityEnum.GETMESSAGES,
+							ActivityStatusEnum.FAILED, getMessagesResponse);
 					return new ResponseEntity<GetMessagesResponse>(getMessagesResponse, HttpStatus.NOT_FOUND);
 				}
 			} else {
-				activityLogService.insertActivityLog((UserRequest) getMessagesRequest, ActivityEnum.LOGIN, 0);
+				activityLogService.insertActivityLog((UserRequest) getMessagesRequest, ActivityEnum.LOGIN,
+						ActivityStatusEnum.FAILED, validateTokenResponse);
 				return new ResponseEntity<GetMessagesResponse>(
-						(GetMessagesResponse) (ResponseBase) validateTokenResponse, HttpStatus.UNAUTHORIZED);
+						new GetMessagesResponse((ResponseBase) validateTokenResponse), HttpStatus.UNAUTHORIZED);
 			}
 		} catch (Exception ex) {
 			throw new ArmutControllerException(ex.toString());
@@ -82,35 +87,37 @@ public class MessageController {
 	}
 
 	/**
-	 * Introdcution
-	 * 
 	 * <dl>
-	 * <dt><span class="strong">Heading 1</span></dt>
-	 * <dd>There is a line break.</dd>
-	 * <dt><span class="strong">Heading 2</span></dt>
-	 * <dd>There is a line break.</dd>
+	 * <dt><span class="strong">send message function/span></dt>
+	 * 
+	 * <dd>User name, token, receiverUserName are mandatory.</dd>
 	 * </dl>
-	 *
-	 * @param x foo
-	 * @return foo
-	 * @throws foo
+	 * 
+	 * @param SendMessageRequest sendMessageRequest
+	 * @return ResponseEntity {@literal <SendMessageResponse>}
+	 * @throws throws ArmutServiceException, ArmutControllerException
 	 */
 	@PostMapping(value = "/messages/sendmessage")
 	public ResponseEntity<SendMessageResponse> sendMessage(@RequestBody SendMessageRequest sendMessageRequest)
 			throws ArmutServiceException, ArmutControllerException {
 		try {
 			LoginResponse validateTokenResponse = userService.validateToken(sendMessageRequest);
-			if (!validateTokenResponse.equals(ResponseEnum.SUCCESS))
+			if (!validateTokenResponse.equals(ResponseEnum.SUCCESS)) {
+				activityLogService.insertActivityLog(sendMessageRequest.getUserName(), ActivityEnum.SENDMESSAGE,
+						ActivityStatusEnum.FAILED, validateTokenResponse);
 				return new ResponseEntity<SendMessageResponse>(
-						(SendMessageResponse) (ResponseBase) validateTokenResponse, HttpStatus.UNAUTHORIZED);
+						new SendMessageResponse((ResponseBase) validateTokenResponse), HttpStatus.UNAUTHORIZED);
+			}
 
 			SendMessageResponse sendMessageResponse = messageService.sendMessage(sendMessageRequest);
 
 			if (sendMessageResponse.equals(ResponseEnum.SUCCESS)) {
-				activityLogService.insertActivityLog(sendMessageRequest.getUserName(), ActivityEnum.SENDMESSAGE, 1);
+				activityLogService.insertActivityLog(sendMessageRequest.getUserName(), ActivityEnum.SENDMESSAGE,
+						ActivityStatusEnum.SUCCESS, sendMessageResponse);
 				return new ResponseEntity<SendMessageResponse>(sendMessageResponse, HttpStatus.OK);
 			} else {
-				activityLogService.insertActivityLog(sendMessageRequest.getUserName(), ActivityEnum.SENDMESSAGE, 0);
+				activityLogService.insertActivityLog(sendMessageRequest.getUserName(), ActivityEnum.SENDMESSAGE,
+						ActivityStatusEnum.FAILED, sendMessageResponse);
 				return new ResponseEntity<SendMessageResponse>(sendMessageResponse, HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception ex) {
