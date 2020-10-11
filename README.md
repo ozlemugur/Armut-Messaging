@@ -58,10 +58,17 @@ to scale up armut_armutapi, run the following command:
     >docker-compose up -d
  
  
+ #### to login pgadmin  
+ 
+    the other informations are on the yaml.
+    http://192.168.0.20:5433 
+    
+ 
+ 
   ##### armut_armutapi endpoints
   
   ###### to signup  armut messaging api 
-    change the localhost with your advertise IP or set up according to where you prefer to call.
+    change the 192.168.0.29 with your advertise IP or set up according to where you prefer to call.
     
     POST
     http://192.168.0.29:8080/users/signup
