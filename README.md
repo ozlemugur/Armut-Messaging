@@ -74,6 +74,8 @@ to scale up armut_armutapi, run the following command:
     http://192.168.0.29:8080/users/signup
    
     { "userName": "luffy" , "password" : "lola"}
+    
+    ---------------------------------   
        {
         "message": "success.",
         "code": "0000"
@@ -92,12 +94,14 @@ to scale up armut_armutapi, run the following command:
      http://192.168.0.29:8080/users/login
      { "userName": "luffy" , "password" : "lola"}
     
+    --------------------------------- 
      {
       "message": "success.",
       "code": "0000",
       "token": "4f3536bc-8315-4ba4-89df-015e70b2f24c"
-      }
+     }
  
+     ---------------------------------  
       { "userName": "zoro" , "password" : "lola"}
  
  
@@ -111,7 +115,7 @@ to scale up armut_armutapi, run the following command:
       "content" : "text is comminggggg"
       }
      }
-    
+    --------------------------------- 
      {
      "message": "success.",
       "code": "0000"
@@ -124,6 +128,7 @@ to scale up armut_armutapi, run the following command:
    
       { "userName": "luffy" , "token" : "4f3536bc-8315-4ba4-89df-015e70b2f24c"}
       
+      --------------------------------- 
       {
        "message": "success.",
        "code": "0000",
@@ -142,6 +147,7 @@ to scale up armut_armutapi, run the following command:
     
      {"userName": "luffy" , "token" : "FCEEB9B9D469401FE558062C4BD25954", "toBeBlockedUserName" : "zoro"}
     
+    --------------------------------- 
        {
        "message": "success.",
        "code": "0000"
