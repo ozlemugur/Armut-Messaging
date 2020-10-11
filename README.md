@@ -66,6 +66,7 @@ to scale up armut_armutapi, run the following command:
    
    >{ "userName": "luffy" , "password" : "lola"}
    >{ "userName": "robin" , "password" : "lola"}
+   >{ "userName": "zoro" , "password" : "lola"}
    
    ###### to login armut messaging api
    When the login operation ends succesfully, service returns a token which is going to be used for calling the other operations. Take the token.
@@ -73,6 +74,7 @@ to scale up armut_armutapi, run the following command:
    >http://localhost:8080/users/login
    
    >{ "userName": "luffy" , "password" : "lola"}
+   >{ "userName": "zoro" , "password" : "lola"}
  
  
   ###### to send message 
@@ -96,6 +98,6 @@ to scale up armut_armutapi, run the following command:
    
     http://localhost:8080/block
     
-    { "userName": "oslem" , "token" : "FCEEB9B9D469401FE558062C4BD25954", "toBeBlockedUserName" : "osman"}
+    { "userName": "luffy" , "token" : "FCEEB9B9D469401FE558062C4BD25954", "toBeBlockedUserName" : "zoro"}
     
     
