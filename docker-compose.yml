@@ -1,0 +1,19 @@
+version : "3.3"
+services:
+  postgres:
+    image: postgres:12.4
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=panda
+ #   volumes:
+ #     - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  armut:
+    image: ozlemugur/armutmessagingimage
+    ports:
+      - "8080-8085:8080"
+    depends_on:
+      - postgres
+

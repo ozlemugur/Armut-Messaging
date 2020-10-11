@@ -1,0 +1,40 @@
+version : "3.3"
+
+networks:
+  armut:
+    driver: overlay
+services:
+  postgres:
+    image: postgres:12.4
+    networks:
+      - armut
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=panda
+ #   volumes:
+ #     - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  armutapi:
+    image: ozlemugur/armutmessagingimage
+    networks:
+      - armut
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    networks:
+      - armut
+    environment:
+      - PGADMIN_DEFAULT_PASSWORD=panda
+      - PGADMIN_DEFAULT_EMAIL=ozlem.ugur@gmail.com
+    ports:
+      - "5433:80"
+    depends_on:
+      - postgres
+
