@@ -51,6 +51,11 @@ to scale up armut_armutapi, run the following command:
     3/3: running   [==================================================>] 
     verify: Service converged 
 
+ ##### you can follow the exception logs, run the following command:
+    
+      > docker service logs -f armut_armutapi 
+
+
  ##### to deploy with docker-compose
  
  to deploy with docker-compose , you can find the docker-compose.yml file  in th project, run the following command:
@@ -155,3 +160,9 @@ to scale up armut_armutapi, run the following command:
        
        
     #### While building the project, do not forget chosing maven profile. dev/prod
+    
+    
+   
+    
+    
+    
